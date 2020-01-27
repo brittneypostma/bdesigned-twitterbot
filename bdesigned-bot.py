@@ -1,3 +1,4 @@
+from boto.s3.connection import S3Connection
 import time
 import tweepy
 import os
@@ -5,15 +6,20 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-CONSUMER_KEY = os.getenv("CONSUMER_KEY")
-CONSUMER_SECRET = os.getenv("CONSUMER_SECRET")
+CONSUMER_KEY = os.environ['CONSUMER_KEY']
+CONSUMER_SECRET = os.environ['CONSUMER_SECRET']
+
+conn == S3Connection()
+
+# CONSUMER_KEY = os.getenv("CONSUMER_KEY")
+# CONSUMER_SECRET = os.getenv("CONSUMER_SECRET")
 ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
 ACCESS_TOKEN_SECRET = os.getenv("ACCESS_TOKEN_SECRET")
 
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
-api = tweepy.API(auth)
+api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 user = api.me()
 
 # public_tweets = api.home_timeline()
@@ -33,18 +39,19 @@ def limit_handler(cursor):
 
 
 # Narcissist bot
-# search = 'python'
-# numberOfTweets = 5
+search = '#zerotomastery'
+totalItems = 50
 
-# for tweet in tweepy.Cursor(api.search, search).items(numberOfTweets):
-#     try:
-#         tweet.favorite() # likes
-#         # tweet.retweet() # retweets
-#         print('I liked ', tweet.text)
-#     except tweepy.TweepError as err:
-#         print(err.reason)
-#     except StopIteration:
-#         break
+for tweet in tweepy.Cursor(api.search, search).items(totalItems):
+    try:
+        # tweet.favorite()  # likes
+        tweet.retweet()  # retweets
+        time.sleep(10)  # 10 second wait
+        # print('I liked ', tweet.text)
+    except tweepy.TweepError as err:
+        print(err.reason)
+    except StopIteration:
+        break
 
 # generous bot
 # for follower in limit_handler(tweepy.Cursor(api.followers).items()):

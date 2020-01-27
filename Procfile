@@ -1,1 +1,1 @@
-worker: python bdesigned-bot.py
+web: python server.py
