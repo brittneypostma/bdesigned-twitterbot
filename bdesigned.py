@@ -24,7 +24,7 @@ def limit_handler(cursor):
     try:
         while True:
             yield cursor.next()
-    except tweepy.RateLimitError:
+    except tweeWpy.RateLimitError:
         time.sleep(300)
 
 
@@ -32,7 +32,7 @@ def limit_handler(cursor):
 
 
 # Narcissist bot
-search = '#zerotomastery OR #ztm OR #svelte OR @svelte'
+search = '#zerotomastery OR #ztm OR #svelte OR @svelte OR #javascript OR #webdev #womenwhocode OR #momscancode OR @WomenWhoCode'
 totalItems = 10
 
 for tweet in tweepy.Cursor(api.search, search).items(totalItems):
