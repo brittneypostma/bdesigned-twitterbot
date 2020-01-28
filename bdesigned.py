@@ -1,12 +1,13 @@
-from boto.s3.connection import S3Connection
+
+from os import environ
 import time
 import tweepy
-import os
-from dotenv import load_dotenv
-load_dotenv()
+# import os
+# from dotenv import load_dotenv
+# load_dotenv()
+# from boto.s3.connection import S3Connection
 
-
-s3 = S3Connection(os.environ['CONSUMER_KEY'], os.environ['CONSUMER_SECRET'])
+# s3 = S3Connection(os.environ['CONSUMER_KEY'], os.environ['CONSUMER_SECRET'])
 
 CONSUMER_KEY = os.getenv("CONSUMER_KEY")
 CONSUMER_SECRET = os.getenv("CONSUMER_SECRET")
@@ -18,6 +19,7 @@ auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
 api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 user = api.me()
+print(user.name)
 
 # public_tweets = api.home_timeline()
 # for tweet in public_tweets:
