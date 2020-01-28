@@ -36,15 +36,14 @@ def limit_handler(cursor):
 
 
 # Narcissist bot
-search = '#zerotomastery'
-totalItems = 50
+search = '#zerotomastery OR #ztm OR #svelte OR @svelte'
+totalItems = 10
 
 for tweet in tweepy.Cursor(api.search, search).items(totalItems):
     try:
-        # tweet.favorite()  # likes
+        tweet.favorite()  # likes
         tweet.retweet()  # retweets
-        time.sleep(1)  # 1 second wait
-        # print('I liked ', tweet.text)
+        print('It worked')
     except tweepy.TweepError as err:
         print(err.reason)
     except StopIteration:
