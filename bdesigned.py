@@ -2,12 +2,6 @@
 from os import environ
 import time
 import tweepy
-# import os
-# from dotenv import load_dotenv
-# load_dotenv()
-# from boto.s3.connection import S3Connection
-
-# s3 = S3Connection(os.environ['CONSUMER_KEY'], os.environ['CONSUMER_SECRET'])
 
 CONSUMER_KEY = environ['CONSUMER_KEY']
 CONSUMER_SECRET = environ['CONSUMER_SECRET']
