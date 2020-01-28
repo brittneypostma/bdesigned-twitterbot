@@ -6,13 +6,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-CONSUMER_KEY = os.environ['CONSUMER_KEY']
-CONSUMER_SECRET = os.environ['CONSUMER_SECRET']
+s3 = S3Connection(os.environ['CONSUMER_KEY'], os.environ['CONSUMER_SECRET'])
 
-conn == S3Connection()
-
-# CONSUMER_KEY = os.getenv("CONSUMER_KEY")
-# CONSUMER_SECRET = os.getenv("CONSUMER_SECRET")
+CONSUMER_KEY = os.getenv("CONSUMER_KEY")
+CONSUMER_SECRET = os.getenv("CONSUMER_SECRET")
 ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")
 ACCESS_TOKEN_SECRET = os.getenv("ACCESS_TOKEN_SECRET")
 
@@ -46,7 +43,7 @@ for tweet in tweepy.Cursor(api.search, search).items(totalItems):
     try:
         # tweet.favorite()  # likes
         tweet.retweet()  # retweets
-        time.sleep(10)  # 10 second wait
+        time.sleep(1)  # 1 second wait
         # print('I liked ', tweet.text)
     except tweepy.TweepError as err:
         print(err.reason)
