@@ -21,11 +21,11 @@ print(user.name)
 
 
 def limit_handler(cursor):
-    try:
-        while True:
+    while True:
+        try:
             yield cursor.next()
-    except tweepy.RateLimitError:
-        time.sleep(300)
+        except tweepy.RateLimitError:
+            time.sleep(15 * 60)
 
 
 # api.update_status('b.Designed Bot is now working! #python #tweepy')
