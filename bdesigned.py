@@ -24,7 +24,7 @@ def limit_handler(cursor):
     try:
         while True:
             yield cursor.next()
-    except tweeWpy.RateLimitError:
+    except tweepy.RateLimitError:
         time.sleep(300)
 
 
