@@ -46,6 +46,6 @@ for tweet in tweepy.Cursor(api.search, search).items(totalItems):
         break
 
 # generous bot
-# for follower in limit_handler(tweepy.Cursor(api.followers).items()):
-#     follower.follow()
-#     break
+for follower in limit_handler(tweepy.Cursor(api.followers).items()):
+    follower.follow()
+    break
