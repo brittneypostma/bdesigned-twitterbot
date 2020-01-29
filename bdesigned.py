@@ -19,8 +19,20 @@ user = api.me()
 
 class MyStreamListener(tweepy.StreamListener):
 
-    def on_status(self, status):
-        print(status.text)
+     def on_status(self, tweet):
+            if not tweet.favorited:
+            # Mark it as Liked, since we have not done it yet
+            try:
+                tweet.favorite()
+            except Exception as e:
+                print("Error on fav", e.reason)
+        if not tweet.retweeted:
+            # Retweet, since we have not retweeted it yet
+            try:
+                tweet.retweet()
+            except Exception as e:
+                print("Error on fav", e.reason)
+
 
     def on_error(self, status_code):
         if status_code == 420:
