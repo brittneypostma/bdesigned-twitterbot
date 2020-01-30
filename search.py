@@ -49,7 +49,7 @@ def main():
     api = create_api()
     since_id = 1
     while True:
-        since_id = check_mentions(api, ["@ZTMBot", "#zerotomastery"], since_id)
+        since_id = check_mentions(api, ["ZTMBot", "zerotomastery"], since_id)
         follow_followers(api)
         fav_retweet(api)
         print("Waiting...")
