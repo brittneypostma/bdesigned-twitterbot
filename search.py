@@ -14,7 +14,7 @@ def check_mentions(api, keywords, since_id):
             if not tweet.user.following:
                 tweet.user.follow()
 
-            api.update_status(status='ZTMBot to the rescue!',
+            api.update_status(status='Hi, this is bDesigned-Bot, you can DM this account or reach me through my main account @BrittneyPostma! Thanks! 😀',
                               in_reply_to_status_id=tweet.id, auto_populate_reply_metadata=True)
     return new_since_id
 
@@ -48,7 +48,8 @@ def main():
     api = create_api()
     since_id = 1
     while True:
-        since_id = check_mentions(api, ["ztmbot", "zerotomastery"], since_id)
+        since_id = check_mentions(api, ["bDesigned", "bdesigned", "BrittneyPostma",
+                                        "brittneypostma", "Brittney Postma", "b.Designed"], since_id)
         follow_followers(api)
         fav_retweet(api)
         print("Waiting...")
