@@ -16,7 +16,7 @@ def check_mentions(api, keywords, since_id):
 
             api.update_status(status='ZTMBot to the rescue!',
                               in_reply_to_status_id=tweet.id, auto_populate_reply_metadata=True)
-    return new_since_id, api
+    return new_since_id
 
 
 def follow_followers(api):
