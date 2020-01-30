@@ -45,6 +45,6 @@ def main(keywords, ids):
 
 if __name__ == "___main__":
     keywords = ['Python', 'JavaScript', 'WebDev', 'WomenWhoCode', 'MomsCanCode', 'zerotomastery', 'ztm',
-                'Zero To Mastery', 'Programmer', 'svelte', 'sveltejs', 'sapper', 'BrittneyPostma', 'b.Designed', 'bDesigned', '@BrittneyPostma', '@bDesigned']
+                'Zero To Mastery', 'Programmer', 'svelte', 'sveltejs', 'sapper', 'BrittneyPostma', 'b.Designed', 'bDesigned', 'BrittneyPostma', 'bDesigned']
     ids = ["224115510"]
     main(keywords, ids)
