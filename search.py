@@ -27,7 +27,7 @@ def follow_followers(api):
 
 
 def fav_retweet(api):
-    terms = '#zerotomastery OR #ztm OR #ZTM OR #ZeroToMastery OR #ZerotoMastery OR #svelte OR @svelte OR #javascript OR #webdev #womenwhocode OR #momscancode OR @WomenWhoCode OR #python OR #programmer @andreineogoie'
+    terms = '#zerotomastery OR #ztm OR #ZTM OR #ZeroToMastery OR #ZerotoMastery OR #svelte OR @svelte OR #javascript OR #webdev #womenwhocode OR #momscancode OR @WomenWhoCode OR #python OR #programmer OR @andreineogoie'
     for tweet in tweepy.Cursor(api.search, terms).items(100):
         if not tweet.favorited:
             try:
