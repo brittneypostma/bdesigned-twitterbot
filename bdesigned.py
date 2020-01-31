@@ -65,6 +65,6 @@ if __name__ == "___main__":
 
         follow_list = userid_list
     try:
-        main(track_list, ids)
+        main(track_list, follow_list)
     except Exception as e:
         print(e.reason)
