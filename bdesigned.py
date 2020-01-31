@@ -44,7 +44,27 @@ def main(keywords, ids):
 
 
 if __name__ == "___main__":
-    keywords = ['Python', 'JavaScript', 'WebDev', 'WomenWhoCode', 'MomsCanCode', 'zerotomastery', 'ztm', 'Zero To Mastery',
-                'Programmer', 'svelte', 'sveltejs', 'sapper', 'BrittneyPostma', 'b.Designed', 'bDesigned', 'BrittneyPostma', 'bDesigned', 'syntax', 'syntaxfm', 'syntaxFM', 'stolinski', 'wesbos']
-    ids = ["224115510"]
-    main(keywords, ids)
+    track_list = ['Python', 'JavaScript', 'WebDev', 'WomenWhoCode', 'MomsCanCode', 'zerotomastery', 'ztm', 'Zero To Mastery', 'programmer', 'svelte',
+                  'sveltejs', 'sapper', 'BrittneyPostma', 'b.Designed', 'bDesigned', 'BrittneyPostma', 'bDesigned', 'syntax', 'syntaxfm', 'syntaxFM', 'stolinski', 'wesbos']
+    # ids = ["224115510"]
+    follow_list = raw_input(
+        '224115510, 815246, 18727585, 733722018596687872, 801833412487184384, 459275531').strip()
+    follow_list = [u for u in follow_list.split(',')]
+    userid_list = []
+    username_list = []
+
+    for user in follow_list:
+        if user.isdigit():
+            userid_list.append(user)
+        else:
+            username_list.append(user)
+
+        for username in username_list:
+            user = tweepy.API().get_user(username)
+            userid_list.append(user.id)
+
+        follow_list = userid_list
+    try:
+        main(track_list, ids)
+    except Exception as e:
+        print(e.reason)
