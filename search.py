@@ -51,16 +51,15 @@ def fav_retweet(api):
                            result_type="recent", lang="en").items(25)
     print("Searching for terms...")
     for tweet in search:
-        for like in liked:
-            if tweet.id not in like:
-                try:
-                    tweet.favorite()
-                    time.sleep(5)
-                    tweet.retweet()
-                    liked.append(tweet.id)
-                    print('Liked and retweeted', tweet.text)
-                except Exception as e:
-                    print("Error on fav", e)
+        if tweet.id not in liked:
+            try:
+                tweet.favorite()
+                time.sleep(5)
+                tweet.retweet()
+                liked.append(tweet.id)
+                print('Liked and retweeted', tweet.text)
+            except Exception as e:
+                print("Error on fav", e)
             else:
                 print("Tweet already liked.")
 
