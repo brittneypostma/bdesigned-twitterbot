@@ -3,21 +3,21 @@ from config import create_api
 import time
 
 
-def check_mentions(api, keywords, since_id):
-    new_since_id = since_id
-    for tweet in tweepy.Cursor(api.mentions_timeline,
-                               since_id=since_id).items():
-        new_since_id = max(tweet.id, new_since_id)
-        print(tweet.id, new_since_id)
-        if tweet.in_reply_to_status_id is not None:
-            continue
-        if any(keyword in tweet.text.lower() for keyword in keywords):
-            if not tweet.user.following:
-                tweet.user.follow()
+# def check_mentions(api, keywords, since_id):
+#     new_since_id = since_id
+#     for tweet in tweepy.Cursor(api.mentions_timeline,
+#                                since_id=since_id).items():
+#         new_since_id = max(tweet.id, new_since_id)
+#         print(tweet.id, new_since_id)
+#         if tweet.in_reply_to_status_id is not None:
+#             continue
+#         if any(keyword in tweet.text.lower() for keyword in keywords):
+#             if not tweet.user.following:
+#                 tweet.user.follow()
 
-            api.update_status(status='Hi, this is bDesigned-Bot, you can DM this account or reach me through my main account @BrittneyPostma! Thanks! 😀',
-                              in_reply_to_status_id=tweet.id, auto_populate_reply_metadata=True)
-    return new_since_id
+#             api.update_status(status='Hi, this is bDesigned-Bot, you can DM this account or reach me through my main account @BrittneyPostma! Thanks! 😀',
+#                               in_reply_to_status_id=tweet.id, auto_populate_reply_metadata=True)
+#     return new_since_id
 
 
 def follow_followers(api):
@@ -47,10 +47,10 @@ def fav_retweet(api):
 
 def main():
     api = create_api()
-    since_id = 1
+    # since_id = 1
     while True:
-        since_id = check_mentions(api, ["bDesigned", "bdesigned", "BrittneyPostma",
-                                        "brittneypostma", "Brittney Postma", "b.Designed"], since_id)
+        # since_id = check_mentions(api, ["bDesigned", "bdesigned", "BrittneyPostma",
+        #                                 "brittneypostma", "Brittney Postma", "b.Designed"], since_id)
         follow_followers(api)
         fav_retweet(api)
         print("Waiting...")
