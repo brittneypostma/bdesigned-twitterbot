@@ -5,7 +5,6 @@ import time
 # DO NOT TOUCH LISTS
 
 followed = []
-liked = []
 
 # def check_mentions(api, keywords, since_id):
 #     new_since_id = since_id
@@ -51,17 +50,16 @@ def fav_retweet(api):
                            result_type="recent", lang="en").items(25)
     print("Searching for terms...")
     for tweet in search:
-        if tweet.id not in liked:
+        if not tweet.retweeted:
             try:
                 tweet.favorite()
                 time.sleep(5)
                 tweet.retweet()
-                liked.append(tweet.id)
                 print('Liked and retweeted', tweet.text)
             except Exception as e:
-                print("Error on fav", e)
+                print("Error on fav and retweet", e.message)
         else:
-            print("Tweet already liked.")
+            print("Tweet already liked and retweeted.")
 
 
 def main():
