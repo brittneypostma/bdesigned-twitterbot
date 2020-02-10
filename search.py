@@ -2,6 +2,10 @@ import tweepy
 from config import create_api
 import time
 
+# DO NOT TOUCH LISTS
+
+followed = []
+liked = []
 
 # def check_mentions(api, keywords, since_id):
 #     new_since_id = since_id
@@ -24,24 +28,38 @@ def follow_followers(api):
     for follower in tweepy.Cursor(api.followers).items():
         if not follower.following:
             follower.follow()
-            print('followed', follower.name)
+            followed.append(follower.id)
+            print('Followed', follower.name)
+
+
+def unfollow(api):
+    for user in followed:
+        try:
+            if (api.exists_friendship(source_screen_name='@bDesignedWebDev', target_id=user) == False):
+                api.destroy_friendship(id=user)
+                time.sleep(10)
+                followed.remove(user)
+                print("Unfollowed:", user)
+        except:
+            print("Rate Limit Exceeded")
+            time.sleep(900)
 
 
 def fav_retweet(api):
     terms = '#zerotomastery OR #ztm OR #ZTM OR #ZeroToMastery OR #ZerotoMastery OR #svelte OR @svelte OR #javascript OR #webdev #womenwhocode OR #momscancode OR @WomenWhoCode OR #python OR #programmer OR @andreineogoie OR #syntaxFM OR #syntaxfm OR @syntaxFM OR @stolinski OR @wesbos'
-    for tweet in tweepy.Cursor(api.search, terms).items(25):
-        if not tweet.favorited:
-            try:
-                tweet.favorite()
-            except Exception as e:
-                print("Error on fav", e.reason)
-
-        if not tweet.retweeted:
-            # Retweet, since we have not retweeted it yet
-            try:
-                tweet.retweet()
-            except Exception as e:
-                print("Error on fav", e.reason)
+    search = tweepy.Cursor(api.search, q=terms,
+                           result_type="recent", lang="en").items(25)
+    print("Searching for terms...")
+    for tweet in search:
+        for like in liked:
+            if tweet.id not in like:
+                try:
+                    tweet.favorite()
+                    time.sleep(5)
+                    tweet.retweet()
+                    liked.append(tweet.id)
+                except Exception as e:
+                    print("Error on fav", e)
         print('Liked and retweeted', tweet.text)
 
 
@@ -53,6 +71,7 @@ def main():
         #                                 "brittneypostma", "Brittney Postma", "b.Designed"], since_id)
         follow_followers(api)
         fav_retweet(api)
+        unfollow(api)
         print("Waiting...")
         time.sleep(60)
 
