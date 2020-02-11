@@ -19,14 +19,14 @@ class FavRetweetListener(tweepy.StreamListener):
                 tweet.favorite()
                 print('Liked', tweet.text)
             except Exception as e:
-                print("Error on fav", e.reason)
+                print("Error on fav", e)
         if not tweet.retweeted:
             # Retweet, since we have not retweeted it yet
             try:
                 tweet.retweet()
                 print('Retweeted', tweet.text)
             except Exception as e:
-                print("Error on retweet", e.reason)
+                print("Error on retweet", e)
 
     def on_error(self, status_code):
         if status_code == 420:
@@ -54,4 +54,4 @@ if __name__ == "___main__":
     try:
         main(track_list, follow_list)
     except Exception as e:
-        print(e.reason)
+        print(e)
