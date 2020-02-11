@@ -58,8 +58,7 @@ def fav_retweet(api):
                 print('Liked and retweeted', tweet.text)
             except Exception as e:
                 print("Error on fav and retweet", e, tweet.text)
-        elif:
-            tweet.retweeted:
+        elif tweet.retweeted:
             return
         else:
             print("Tweet already liked and retweeted.")
