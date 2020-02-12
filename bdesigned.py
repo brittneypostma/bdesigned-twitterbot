@@ -32,7 +32,7 @@ class FavRetweetListener(tweepy.StreamListener):
         if status_code == 420:
             return False
         elif status_code == 429:
-            time.sleep(60)
+            time.sleep(900)
             return
         else:
             print(status_code)
