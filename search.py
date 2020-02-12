@@ -44,24 +44,24 @@ def unfollow(api):
             time.sleep(900)
 
 
-def fav_retweet(api):
-    terms = '#zerotomastery OR #ztm OR #ZTM OR #ZeroToMastery OR #ZerotoMastery OR #svelte OR @svelte OR #javascript OR #webdev OR #womenwhocode OR #momscancode OR @WomenWhoCode OR #python OR #programmer OR @andreineogoie OR #syntaxFM OR #syntaxfm OR @syntaxFM OR @stolinski OR @wesbos OR @bDesignedWebDev OR @PostmaBrittney OR @BrittneyPostma OR #WebDev OR SyntaxFM'
-    search = tweepy.Cursor(api.search, q=terms,
-                           result_type="recent", lang="en").items(100)
-    print("Searching for terms...")
-    for tweet in search:
-        if not tweet.retweeted:
-            try:
-                tweet.favorite()
-                time.sleep(5)
-                tweet.retweet()
-                print('Liked and retweeted', tweet.text)
-            except Exception as e:
-                print("Error on fav and retweet", e, tweet.text)
-        elif tweet.retweeted:
-            return
-        else:
-            print("Tweet already liked and retweeted.")
+# def fav_retweet(api):
+#     terms = '#zerotomastery OR #ztm OR #ZTM OR #ZeroToMastery OR #ZerotoMastery OR #svelte OR @svelte OR #javascript OR #webdev OR #womenwhocode OR #momscancode OR @WomenWhoCode OR #python OR #programmer OR @andreineogoie OR #syntaxFM OR #syntaxfm OR @syntaxFM OR @stolinski OR @wesbos OR @bDesignedWebDev OR @PostmaBrittney OR @BrittneyPostma OR #WebDev OR SyntaxFM'
+#     search = tweepy.Cursor(api.search, q=terms,
+#                            result_type="recent", lang="en").items(50)
+#     print("Searching for terms...")
+#     for tweet in search:
+#         if not tweet.retweeted:
+#             try:
+#                 tweet.favorite()
+#                 time.sleep(5)
+#                 tweet.retweet()
+#                 print('Liked and retweeted', tweet.text)
+#             except Exception as e:
+#                 print("Error on fav and retweet", e, tweet.text)
+#         elif tweet.retweeted:
+#             return
+#         else:
+#             print("Tweet already liked and retweeted.")
 
 
 def main():
@@ -71,7 +71,7 @@ def main():
         # since_id = check_mentions(api, ["bDesigned", "bdesigned", "BrittneyPostma",
         #                                 "brittneypostma", "Brittney Postma", "b.Designed"], since_id)
         follow_followers(api)
-        fav_retweet(api)
+        # fav_retweet(api)
         unfollow(api)
         print("Waiting...")
         time.sleep(60)

@@ -29,13 +29,16 @@ class FavRetweetListener(tweepy.StreamListener):
                 print("Error on retweet", e)
 
     def on_error(self, status_code):
-        if status_code == 420:
-            return False
-        elif status_code == 429:
-            time.sleep(900)
-            return
-        else:
-            print(status_code)
+        try:
+            if status_code == 420:
+                return False
+            elif status_code == 429:
+                time.sleep(900)
+                return
+            else:
+                print(status_code)
+        except Exception as e:
+            print(e)
 
 
 def main(keywords, ids):
