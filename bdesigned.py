@@ -9,34 +9,33 @@ class FavRetweetListener(tweepy.StreamListener):
         self.me = api.me()
 
     def on_status(self, tweet):
-        if tweet.in_reply_to_status_id is not None or \
-                tweet.user.id == self.me.id:
+        if tweet.in_reply_to_status_id is not None or tweet.user.id == self.me.id:
             # This tweet is a reply or I'm its author so, ignore it
             return
         if not tweet.favorited:
             # Mark it as Liked, since we have not done it yet
             try:
                 tweet.favorite()
-                print('Liked', tweet.text)
-            except Exception as e:
-                print("Error on fav", e)
+                print('Stream favorited:', tweet.text)
+            except tweepy.TweepError as e:
+                print("Error on stream fav", e)
         if not tweet.retweeted:
             # Retweet, since we have not retweeted it yet
             try:
                 tweet.retweet()
-                print('Retweeted', tweet.text)
-            except Exception as e:
-                print("Error on retweet", e)
+                print('Stream retweeted:', tweet.text)
+            except tweepy.TweepError as e:
+                print("Error on stream retweet", e)
 
     def on_error(self, status_code):
         try:
             if status_code == 420:
                 return False
             elif status_code == 429:
-                time.sleep(900)
+                time.sleep(60)
                 return
             else:
-                print(status_code)
+                print(tweepy.TweepError, status_code)
         except Exception as e:
             print(e)
 
@@ -44,7 +43,7 @@ class FavRetweetListener(tweepy.StreamListener):
 def main(keywords, ids):
     api = create_api()
     tweets_listener = FavRetweetListener(api)
-    stream = tweepy.Stream(api.auth, tweets_listener)
+    stream = tweepy.Stream(auth=api.auth, listener=tweets_listener)
     stream.filter(track=keywords, follow=ids, languages=["en"])
 
 
