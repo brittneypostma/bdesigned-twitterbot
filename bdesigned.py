@@ -51,10 +51,10 @@ if __name__ == "___main__":
     track_list = ['Python', 'JavaScript', 'WebDev', 'WomenWhoCode', 'MomsCanCode', 'zerotomastery', 'ztm', 'Zero To Mastery', 'programmer', 'svelte', 'sveltejs', 'sapper', 'BrittneyPostma', 'b.Designed',
                   'bDesigned', 'BrittneyPostma', 'bDesigned', 'syntax', 'syntaxfm', '@syntaxFM', '@stolinski', '@wesbos', '@bDesignedWebDev', '@PostmaBrittney', '#zerotomastery', '#ztm', 'bDesignedWebDev', '@BrittneyPostma']
     # ids = ["224115510"]
-    follow_list = '1042139340032356352'
-    # ['224115510', '815246', '18727585', '733722018596687872', '801833412487184384', '459275531']
+    follow_list = [
+        '224115510', '815246', '18727585', '733722018596687872', '801833412487184384', '459275531']
     try:
         main(track_list, follow_list)
-        print('Streaming...')
+        print('Streaming')
     except Exception as e:
         print(e)
